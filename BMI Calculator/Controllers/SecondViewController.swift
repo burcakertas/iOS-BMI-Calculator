@@ -2,8 +2,8 @@
 //  SecondViewController.swift
 //  BMI Calculator
 //
-//  Created by Burcak Ertas on 5.07.2023.
-//  Copyright © 2023 Angela Yu. All rights reserved.
+//  Created by Burcak Ertas on 13/08/2023.
+//  Copyright © 2023 Burcak  Ertas. All rights reserved.
 //
 
 import UIKit
