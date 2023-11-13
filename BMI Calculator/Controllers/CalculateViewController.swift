@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
+    
+    var calculatorBrain = CalculatorBrain()
     
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
@@ -30,8 +32,21 @@ class ViewController: UIViewController {
     @IBAction func calculatePressed(_ sender: UIButton) {
         let heightValue = heightSlider.value
         let weightValue = weightSlider.value
-        let calculatedValue = weightValue / pow(heightValue, 2)
-        print(String(format: "%.1f", calculatedValue))
+        calculatorBrain.calculateBMI(heightValue: heightValue, weightValue: weightValue)
+        
+        //navigator. identifier-> stroryboardda iki sayfa arasındaki okun identifierı. sender-> who will be the initiator of the segue.
+        self.performSegue(withIdentifier: "goToResult", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultViewController
+            destinationVC.bmiValue = calculatorBrain.getBMIValue()
+            let result = calculatorBrain.getBackgorundColorAndAdviceText(bmiValue: destinationVC.bmiValue ?? "0.0")
+            destinationVC.backgorundColorFromModel = result.0
+            destinationVC.adviceLabelText = result.1
+        }
     }
 }
 
